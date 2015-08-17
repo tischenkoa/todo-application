@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Todo application</title>
+    <script src="js/lib/jquery-1.11.0.min.js"></script>
+    <script src="js/lib/script.js"></script>
+    <script src="js/widget-todos.js"></script>
+    <link rel="stylesheet" href="./css/widget-todos.css">
+</head>
+
+<body>
+    <div class="widget-todos clear-float">
+        <div class="widget-todos-list-zone ">
+            <form class="widget-todos-conteiner-filter ">
+                <input type="text" class="widget-todos-filter" placeholder="Фильтровать">
+                <button type="reset" class="widget-todos-conteiner-filter-button"></button>
+            </form>
+            <div class="widget-todos-list">
+                <div><span>Lorem ipsum</span>
+                </div>
+                <div></div>
+            </div>
+            <button class="widget-todos-list-new">Новый список</button>
+
+        </div>
+        <div class="widget-todos-tasks-zone">
+            <div class="widget-todos-header clear-float">
+                <form class="widget-todos-conteiner-filter">
+                    <input type="text" class="widget-todos-filter" placeholder="Фильтровать">
+                    <button type="reset" class="widget-todos-conteiner-filter-button"></button>
+                </form>
+                <div class="widget-todos-conteiner-filter-completed">
+                    <input type="checkbox"><span>Выполненые</span>
+                </div>
+
+            </div>
+            <table class="widget-todos-tasks-head">
+                <thead>
+                    <tr>
+                        <td><span>&#9660;</span>Что нужно сделать</td>
+                        <td>Когда</td>
+                        <td>Селано</td>
+                    </tr>
+                </thead>
+            </table>
+            <div class="widget-todos-tasks">
+                <table>
+
+                    <tbody>
+                        <tr>
+                            <td>Lorem ipsum</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+            <button class="widget-todos-task-new">Добавить задачу</button>
+        </div>
+
+    </div>
+        <script>
+    	(function(){
+    		$(window).ready(function(){
+    			window.todosWidget1 = new AppTodos($('body'));
+    		});
+    	})();
+    </script>
+
+
+
+    <h1>Главный файл приложения</h1>
+    <p>Доступное <a href="https://github.com/podgorniy/todo-server#api">API</a> описано в README репозитория</p>
+    <p>Попробуй из командной строки:</p>
+    <h4>Список всех todo списков</h4>
+    <pre><code>$.get('/todos', function (response) {
+    console.log(response)
+})</code></pre>
+
+    <h4>Данные по определенному списку</h4>
+    <p>Формат данных можно менять как угодно на свое усмотрение, не обязательно придерживаться демонстрационного формата</p>
+    <pre><code>$.get('/todos/another-task', function (response) {
+    console.log(response)
+})</code></pre>
+
+    <h4>Создать новый todo список с названием "foo"</h4>
+    <pre><code>$.post('/todos/foo', {
+    todo: JSON.stringify({
+        title: "Foo todo list",
+        created: new Date().toString(),
+        tasks: []
+    })
+})</code></pre>
+
+    <h4>Добавить новую задачу в todo список "foo" (сработает только если тот уже создан)</h4>
+    <pre><code>$.getJSON('/todos/foo').then(function(fooTodoList) {
+	fooTodoList.tasks.push({
+		description: 'Add new task',
+		done: false
+	})
+	return fooTodoList
+}).then(function(fooTodoList) {
+	return $.ajax({
+		url: '/todos/foo',
+		method: 'PUT',
+		data: {
+			todo: JSON.stringify(fooTodoList)
+		}
+	})
+})</code></pre>
+</body>
+
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Todo application</title>
+    <script type="text/javascript" src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="./bower_components/handlebars/handlebars.min.js"></script>
+    <script type="text/javascript" src="./js/wig-to-do.js"></script>
+    <script src="./bower_components/datetimepicker/jquery.datetimepicker.js"></script>
+    <script type="text/javascript" src='./bower_components/moment/min/moment.min.js'></script>
+    <link rel="stylesheet" type="text/css" href="./bower_components/datetimepicker/jquery.datetimepicker.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/wig-to-do.css">
+    <link rel="stylesheet" type="text/css" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="wig-to-do">
+        <div class="container-wig-to-do">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4 container-to-do-list">
+                        <div class="input-group filter-todo">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-filter"></span></div>
+                            <input type="text" class="form-control to-do-filter-list" placeholder="Filter list">
+                        </div>
+                        <div class="to-do-list">
+                            <table class="">
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="btn btn-success btn-sm to-do-add-new-tasks" disabled>Add new list tasks</button>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="container-to-do-tasks">
+                            <form class="form-inline filter-todo" onsubmit="return false;">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><span class="glyphicon glyphicon-filter"></span></div>
+                                        <input type="text" class="form-control to-do-filter-task" placeholder="Filter tasks">
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input class="check-box-show-done-task" type="checkbox" checked>Show done
+                                        </label>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="wrapper-to-do-tasks">
+                                <div class="to-do-tasks">
+                                    <table class="">
+                                        <thead>
+                                            <tr>
+                                                <td class="table-tasks-col-task">Tasks
+                                                    <div>Tasks</div>
+                                                </td>
+                                                <td class="table-tasks-col-where">Where
+                                                    <div>Where</div>
+                                                </td>
+                                                <td class="table-tasks-col-do">Done
+                                                    <div>Done</div>
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-success btn-sm to-do-add-task" disabled>Add task</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h1>Главный файл приложения</h1>
+    <p>Доступное <a href="https://github.com/podgorniy/todo-server#api">API</a> описано в README репозитория</p>
+    <p>Попробуй из командной строки:</p>
+    <h4>Список всех todo списков</h4>
+    <pre><code>$.get('/todos', function (response) {
+    console.log(response)
+})</code></pre>
+    <h4>Данные по определенному списку</h4>
+    <p>Формат данных можно менять как угодно на свое усмотрение, не обязательно придерживаться демонстрационного формата</p>
+    <pre><code>$.get('/todos/another-task', function (response) {
+    console.log(response)
+})</code></pre>
+    <h4>Создать новый todo список с названием "foo"</h4>
+    <pre><code>$.post('/todos/foo', {
+    todo: JSON.stringify({
+        title: "Foo todo list",
+        created: new Date().toString(),
+        tasks: []
+    })
+})</code></pre>
+    <h4>Добавить новую задачу в todo список "foo" (сработает только если тот уже создан)</h4>
+    <pre><code>$.getJSON('/todos/foo').then(function(fooTodoList) {
+    fooTodoList.tasks.push({
+        description: 'Add new task',
+        done: false
+    })
+    return fooTodoList
+}).then(function(fooTodoList) {
+    return $.ajax({
+        url: '/todos/foo',
+        method: 'PUT',
+        data: {
+            todo: JSON.stringify(fooTodoList)
+        }
+    })
+})</code></pre>
+    <script class="template-form-add-new-tasks" type="text/x-handlebars-template">
+        <tr class="form-add-new-tasks">
+            <td>
+                <div class="input-group">
+                    <input type="text" class="input-name-new-tasks form-control" aria-label="..." value='{{value}}' autofocus>
+                    <div class="input-group-btn">
+                        <button class="add-new-tasks btn btn-success" type="button"><span class="glyphicon glyphicon-ok"></span></button>
+                        <button class="to-do-hide-input-add-new-tasks btn btn-danger" type="button"><span class=" glyphicon glyphicon-remove"></span></button>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </script>
+    <script class="template-form-add-new-task" type="text/x-handlebars-template">
+        <tr class="form-add-task">
+            <td>
+                <div class="input-group">
+                    <input type="text" class="input-name-new-task form-control" aria-label="..." value="{{currentNameTask}}" autofocus>
+                    <div class="input-group-btn">
+                        <button class="add-new-task btn btn-success" type="button"><span class="glyphicon glyphicon-ok"></span></button>
+                        <button class="to-do-hide-input-add-task btn btn-danger" type="button"><span class=" glyphicon glyphicon-remove"></span></button>
+                    </div>
+                </div>
+            </td>
+            <td colspan="2">
+                <div class="input-group">
+                    <input type="text" id="datetimepicker" class="input-where-task form-control" aria-label="..." value="{{currentWhereTask}}">
+                    <div class="input-group-addon"><span class="glyphicon glyphicon-time"></span></div>
+                </div>
+            </td>
+        </tr>
+    </script>
+    <script class="template-new-task" type="text/x-handlebars-template">
+        <tr class='{{#if done}}task-done-true{{/if}}'>
+            <td class='task-name'>{{description}}</td>
+            <td class='task-where'>{{where}}</td>
+            <td class='table-task-do'><span class='glyphicon glyphicon-ok'></span>
+            </td>
+        </tr>
+    </script>
+    <script class="template-buttons-edit-task" type="text/x-handlebars-template">
+        <div class="buttons-edit-task">
+            <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="button-edit-task btn btn-default"><span class='glyphicon glyphicon-pencil'></span></button>
+                <button type="button" class="button-remove-task btn btn-default"><span class='glyphicon glyphicon-trash'></span></button>
+            </div>
+        </div>
+    </script>
+    <script type="text/javascript">
+    var applicationTodo = new AppTodos($('.wig-to-do'));
+    </script>
+</body>
+<span></span>
+</html>

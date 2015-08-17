@@ -1,0 +1,204 @@
+/** * Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/) * http://cssreset.com */html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,b, u, i, center,dl, dt, dd, ol, ul, li,fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td,article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary,time, mark, audio, video {	margin: 0;	padding: 0;	border: 0;	font-size: 100%;	font: inherit;	vertical-align: baseline;}/* HTML5 display-role reset for older browsers */article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {	display: block;}body {	line-height: 1;}ol, ul {	list-style: none;}blockquote, q {	quotes: none;}blockquote:before, blockquote:after,q:before, q:after {	content: '';	content: none;}table {	border-collapse: collapse;	border-spacing: 0;}
+
+a:hover {
+	text-decoration: none;
+}
+
+.widget-todos {
+	width: 725px;
+	height: 302px;
+}
+.widget-todos-list-zone {
+	float: left;
+	width: 270px;
+	height: 300px;
+	border: 1px solid black;
+}
+
+.widget-todos-tasks-zone {
+	float: left;
+	width: 450px;
+	height: 300px;
+	border: 1px solid black;
+}
+
+.clear-float:after {
+	content: "";
+	clear: both;
+	display: block;
+}
+
+.widget-todos-filter {
+	width: 190px;
+	height: 20px;
+	padding: 0 25px;
+	border: 1px solid black;
+	border-radius: 10px;
+	margin: 8px 15px;
+
+}
+.widget-todos-conteiner-filter {
+		position: relative;
+		float: left;
+
+}
+
+.widget-todos-conteiner-filter:before {
+	content: url(../images/search.png);
+	position: absolute;
+	left: 20px;
+	top:11px;
+}
+
+.widget-todos-filter:focus, .widget-todos-conteiner-filter-button:focus {
+	outline: none;
+	box-shadow: 0 0 3px 2px rgba(112, 173, 232, 0.65);
+}
+
+.widget-todos-conteiner-filter-button {
+	position: absolute;
+	right: 20px;
+	top:11px;
+	height: 16px;
+	width:16px;
+	border: none;
+	border-radius: 8px;
+	padding: 0;
+	background: url(../images/delete.png);
+}
+
+.widget-todos-conteiner-filter-button:hover {
+	cursor: pointer;
+	background: url(../images/delete-hover.png);
+}
+
+
+.widget-todos-conteiner-filter-completed{
+	float: left;
+	margin: 10px 0 0 5px;
+
+}
+
+
+.widget-todos-list{
+	width: 260px;
+	height: 220px;
+	border: 1px solid black;
+	float: left;
+	overflow-y:scroll;
+	overflow-x: hidden;
+	margin-left: 9px;
+}
+
+.widget-container-list{
+	width: 100%;
+}
+
+.widget-todos-list td{
+	width: 100%;
+	height: 55px;
+	border-bottom: 1px solid black;
+	vertical-align: middle;
+	padding-left: 10px;
+}
+
+.widget-todos-list td:hover{
+	cursor: pointer;
+	background: lightgrey;
+}
+
+
+
+
+
+.widget-todos-list-new {
+	width: 245px;
+	height: 25px;
+	margin-left: 8px;
+	margin-top: 8px;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+.control-new-todo {
+	margin: 0 0 0 10px;
+}
+
+.add-new-todo input {
+	width: 130px;
+}
+
+.panel-edit-todo {
+	float: right;
+}
+
+.panel-edit-todo a {
+	margin: 0 5px 0 0;
+}
+
+.widget-todos-tasks {
+	overflow-y: scroll;
+	height: 195px;
+	border-bottom: 1px solid black;
+}
+.widget-todos-tasks table {
+	width: 100%;
+/*	height: 100%;*/
+}
+
+.widget-todos-tasks-head thead td {
+	text-align: center;
+	vertical-align: middle;
+}
+
+.widget-todos-tasks thead td span{
+	margin-right: 5px;
+}
+
+.widget-todos-tasks tr{
+	height: 25px;
+}
+
+.widget-todos-tasks-head tr{
+	height: 25px;
+}
+
+.widget-todos-tasks-head {
+	width: 433px;
+	height: 25px;
+}
+
+.widget-todos-tasks td , .widget-todos-tasks-head td {
+border: 1px solid black;
+}
+
+.widget-todos-tasks td:first-child, .widget-todos-tasks-head td:first-child {
+	border-left: none;
+}
+
+.widget-todos-tasks-head td:nth-child(1), .widget-todos-tasks td:nth-child(1){
+	width: 60%;
+}
+
+.widget-todos-tasks-head td:nth-child(2), .widget-todos-tasks td:nth-child(2){
+	width: 20%;
+}
+
+.widget-todos-tasks-head td:nth-child(3), .widget-todos-tasks td:nth-child(3){
+	width: 20%;
+}
+
+
+.widget-todos-task-new {
+	width: 345px;
+	height: 25px;
+	margin-left: 45px;
+	margin-top: 8px;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+.widget-todos-task-new:hover, .widget-todos-list-new:hover{
+	cursor: pointer;
+	background: rgb(176, 176, 176);
+}

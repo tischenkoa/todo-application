@@ -1,0 +1,19 @@
+{
+  "name": "wig-to-do",
+  "version": "0.0.0",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "handlebars": "~3.0.3",
+    "bootstrap": "~3.3.5",
+    "jquery": "~2.1.4",
+    "datetimepicker": "~2.4.5",
+    "moment": "~2.10.6"
+  }
+}
